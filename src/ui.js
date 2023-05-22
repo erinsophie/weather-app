@@ -1,31 +1,47 @@
-import { parse, format } from 'date-fns';
+import { parse, format } from "date-fns";
 
 function displayWeather(weatherData) {
-    const city = document.getElementById('city');
-    city.textContent = weatherData.location;
+  const city = document.getElementById("city");
+  city.textContent = weatherData.location;
 
-    const country = document.getElementById('country');
-    country.textContent = weatherData.country;
+  const country = document.getElementById("country");
+  country.textContent = weatherData.country;
 
-    const localTime = document.getElementById('local-time');
-    const date = weatherData.localTime
-    const parsedDate = parse(date, 'yyyy-MM-dd HH:mm', new Date());
-    let formattedDate = format(parsedDate, 'EEEE, do MMMM yyyy, HH:mm');
-    localTime.textContent = formattedDate;
+  const localTime = document.getElementById("local-time");
+  const date = weatherData.localTime;
+  const parsedDate = parse(date, "yyyy-MM-dd HH:mm", new Date());
+  let formattedDate = format(parsedDate, "EEEE, do MMMM yyyy, HH:mm");
+  localTime.textContent = formattedDate;
 
-    const temp = document.getElementById('temp');
-    temp.textContent = `${weatherData.temperature}°C`;
+  const temp = document.getElementById("temp");
+  temp.textContent = `${weatherData.temperature}°C`;
 
-    const condition = document.getElementById('condition');
-    condition.textContent = weatherData.condition;
+  const condition = document.getElementById("condition");
+  condition.textContent = weatherData.condition;
 
-    const wind = document.getElementById('wind');
-    wind.textContent = `${weatherData.windSpeed} kph`;
+  const wind = document.getElementById("wind");
+  wind.textContent = `${weatherData.windSpeed} kph`;
 }
 
-// for each object returned by the forecast data, display like so:
-function displayForecast(forecastData) {
+// for each hour object, display like so:
+function displayHourly(hourlyData) {
 
+  hourlyData.forEach((hour) => {
+    const time = document.createElement("div");
+    const parsedDate = parse(hour.hour, 'yyyy-MM-dd HH:mm', new Date());
+    let formattedHour = format(parsedDate, 'HH:mm');
+    time.textContent = formattedHour;
+
+    const temp = document.createElement("div");
+    temp.textContent = `${hour.temperature}°C`;
+
+    const condition = document.createElement('div');
+    condition.textContent = hour.condition
+
+    const forecastContainer = document.getElementById('forecast-container');
+    
+    forecastContainer.append(time, temp, condition)
+  });
 }
 
-export  {displayWeather, displayForecast }
+export { displayWeather, displayHourly };

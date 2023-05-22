@@ -1,19 +1,20 @@
-import { getWeather, processWeatherData } from "./getData.js";
-import { getForecast, processForecastData } from "./getHourly.js";
-import { displayWeather, displayForecast} from "./ui.js";
+import { getWeather, getHourly } from "./getData.js";
+import { displayWeather, displayHourly } from "./ui.js";
 
-async function handleWeatherRequest(city) {
-  const rawData = await getWeather(city);
-  console.log(rawData);
+async function handleWeatherRequest(city, ) {
+    try {
+        const weatherData = await getWeather(city);
+        displayWeather(weatherData)
+        console.log(weatherData);
 
-  const weatherData = processWeatherData(rawData);
-  console.log(weatherData);
-  displayWeather(weatherData);
-
-  const rawForecastData = await getForecast(city);
-  const forecastData = processForecastData(rawForecastData);
-  console.log(forecastData);
-  displayForecast(forecastData);
+        const hourlyData = await getHourly(city);
+        displayHourly(hourlyData)
+        console.log(hourlyData);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 handleWeatherRequest(prompt("input city:"));
+
+
