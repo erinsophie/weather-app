@@ -14,7 +14,7 @@ function displayWeather(weatherData) {
   localTime.textContent = formattedDate;
 
   const temp = document.getElementById("temp");
-  temp.textContent = `${weatherData.temperature}°C`;
+  temp.textContent = `${weatherData.temperature}`;
 
   const condition = document.getElementById("condition");
   condition.textContent = weatherData.condition;
@@ -25,7 +25,6 @@ function displayWeather(weatherData) {
 
 // for each hour object, display like so:
 function displayHourly(hourlyData) {
-
   hourlyData.forEach((hour) => {
     const time = document.createElement("div");
     const parsedDate = parse(hour.hour, 'yyyy-MM-dd HH:mm', new Date());
@@ -35,12 +34,9 @@ function displayHourly(hourlyData) {
     const temp = document.createElement("div");
     temp.textContent = `${hour.temperature}°C`;
 
-    const condition = document.createElement('div');
-    condition.textContent = hour.condition
-
     const forecastContainer = document.getElementById('forecast-container');
     
-    forecastContainer.append(time, temp, condition)
+    forecastContainer.append(time, temp)
   });
 }
 
