@@ -56,4 +56,10 @@ function displayWeekly(weeklyData) {
   });
 }
 
-export { displayCurrent, displayHourly, displayWeekly };
+// clear forecast container
+function clearContainer() {
+  const forecastContainer = document.getElementById("forecast-container");
+  forecastContainer.innerHTML = "";
+}
+
+export { displayCurrent, displayHourly, displayWeekly, clearContainer };

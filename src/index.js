@@ -1,5 +1,7 @@
 import { handleWeatherRequest } from "./app.js";
 
+// show hourly data by default
 window.addEventListener("DOMContentLoaded", () => {
-  handleWeatherRequest(prompt("Input city:"));
+  const city = prompt("Input city:");
+  handleWeatherRequest(city, "hourly");
 });
