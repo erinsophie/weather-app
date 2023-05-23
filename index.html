@@ -14,9 +14,13 @@
     <button>°C / F</button>
     <div id="condition"></div>
     <div id="wind"></div>
-    <div id="icon"></div>
+    <div id="sunrise"></div>
+    <div id="sunset"></div>
 
-    <input id="search-box" type="text" placeholder="Search location..." />
+    <form id="search-form" novalidate action="" method="get">
+      <input type="text" id="search-box" placeholder="Search city..." />
+      <button type='submit' id="search-btn">Search</button>
+    </form>
 
     <div id="btn-container">
       <button id="todays-btn" data-forecast-type="hourly">Today</button>
