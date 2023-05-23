@@ -113,6 +113,4 @@ async function getWeekly(city) {
   return fetchAndProcess(url, processWeeklyData);
 }
 
-
-
 export { getCurrent, getHourly, getWeekly, parseDate };

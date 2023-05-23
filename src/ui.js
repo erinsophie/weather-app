@@ -1,4 +1,16 @@
 import { parse, format } from "date-fns";
+import { state } from "./app.js";
+
+function convertToFahrenheit(celsius) {
+  const convertedTemp = (celsius * 9) / 5 + 32;
+  return Math.round(convertedTemp);
+}
+
+function displayTemp(data) {
+  return state.isCelsius
+    ? `${data.temperature}°C`
+    : `${convertToFahrenheit(data.temperature)}°F`;
+}
 
 function displayCurrent(currentData) {
   const city = document.getElementById("city");
@@ -8,14 +20,14 @@ function displayCurrent(currentData) {
   country.textContent = currentData.country;
 
   const localTime = document.getElementById("local-time");
-  // parsing the date in the ui purely for ui purposes 
+  // parsing the date in the ui purely for ui purposes
   const date = currentData.localTime;
   const parsedDate = parse(date, "yyyy-MM-dd HH:mm", new Date());
   let formattedDate = format(parsedDate, "EEEE, do MMMM yyyy, HH:mm");
   localTime.textContent = formattedDate;
 
   const temp = document.getElementById("temp");
-  temp.textContent = `${currentData.temperature}°C`;
+  temp.textContent = displayTemp(currentData);
 
   const condition = document.getElementById("condition");
   condition.textContent = currentData.condition;
@@ -23,22 +35,22 @@ function displayCurrent(currentData) {
   const wind = document.getElementById("wind");
   wind.textContent = `Wind ${currentData.windSpeed} kph`;
 
-  const sunrise = document.getElementById('sunrise');
-  sunrise.textContent = `Sunrise ${currentData.sunrise}`
+  const sunrise = document.getElementById("sunrise");
+  sunrise.textContent = `Sunrise ${currentData.sunrise}`;
 
-  const sunset = document.getElementById('sunset');
-  sunset.textContent = `Sunset ${currentData.sunset}`
+  const sunset = document.getElementById("sunset");
+  sunset.textContent = `Sunset ${currentData.sunset}`;
 }
 
 // for each hour object, display like so:
 function displayHourly(hourlyData) {
   clearContainer();
-  hourlyData.forEach((hour) => {
+  hourlyData.forEach((obj) => {
     const time = document.createElement("div");
-    time.textContent = hour.hour;
+    time.textContent = obj.hour;
 
     const temp = document.createElement("div");
-    temp.textContent = `${hour.temperature}°C`;
+    temp.textContent = displayTemp(obj);
 
     const forecastContainer = document.getElementById("forecast-container");
     forecastContainer.append(time, temp);
@@ -50,14 +62,14 @@ function displayWeekly(weeklyData) {
   clearContainer();
   weeklyData.forEach((day) => {
     const dayOfWeek = document.createElement("div");
-    // parsing the date in the ui purely for ui purposes 
+    // parsing the date in the ui purely for ui purposes
     const date = day.date;
     const parsedDate = parse(date, "yyyy-MM-dd", new Date());
     let formattedDate = format(parsedDate, "EEEE");
     dayOfWeek.textContent = formattedDate;
 
     const temp = document.createElement("div");
-    temp.textContent = `${day.temperature}°C`;
+    temp.textContent = displayTemp(day);
 
     const forecastContainer = document.getElementById("forecast-container");
     forecastContainer.append(dayOfWeek, temp);
@@ -69,7 +81,5 @@ function clearContainer() {
   const forecastContainer = document.getElementById("forecast-container");
   forecastContainer.innerHTML = "";
 }
-
-
 
 export { displayCurrent, displayHourly, displayWeekly, clearContainer };

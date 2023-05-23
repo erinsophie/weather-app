@@ -10,16 +10,8 @@ import {
 const state = {
   currentCity: null,
   forecastType: "hourly",
+  isCelsius: true,
 };
-
-const searchInput = document.getElementById("search-box");
-const form = document.getElementById("search-form");
-const searchBtn = document.getElementById("search-btn");
-
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-});
-
 
 async function handleWeatherRequest(city, forecastType) {
   state.currentCity = city;
@@ -34,7 +26,7 @@ async function handleWeatherRequest(city, forecastType) {
       // fetch and display hourly data
       const hourlyData = await getHourly(city);
       displayHourly(hourlyData);
-      console.log(hourlyData)
+      console.log(hourlyData);
     } else if (forecastType === "weekly") {
       // fetch and display weekly data
       const weeklyData = await getWeekly(city);
@@ -60,11 +52,33 @@ function handleForecastClick(event) {
 }
 
 // Attach a single event listener to the parent element
-document.getElementById("btn-container").addEventListener("click", handleForecastClick);
+document
+  .getElementById("btn-container")
+  .addEventListener("click", handleForecastClick);
 
-searchBtn.addEventListener("click", async () => {
-  handleWeatherRequest(searchInput.value, "hourly");
-});
+// handle the search for a city
+function searchForCity() {
+  const searchInput = document.getElementById("search-box");
+  const form = document.getElementById("search-form");
+  const searchBtn = document.getElementById("search-btn");
 
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
 
-export { handleWeatherRequest };
+  searchBtn.addEventListener("click", async () => {
+    handleWeatherRequest(searchInput.value, "hourly");
+  });
+}
+
+// toggle temp
+function toggleTemperature() {
+  const tempBtn = document.getElementById("temp-btn");
+
+  tempBtn.addEventListener("click", () => {
+    state.isCelsius = !state.isCelsius;
+    handleWeatherRequest(state.currentCity, state.forecastType);
+  });
+}
+
+export { handleWeatherRequest, searchForCity, toggleTemperature, state };
