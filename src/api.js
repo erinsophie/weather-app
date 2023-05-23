@@ -1,3 +1,5 @@
+import { parse, format } from "date-fns";
+
 // returns json-parsed data
 async function fetchData(url) {
   try {
@@ -25,25 +27,40 @@ function processCurrentData(data) {
   };
 }
 
+// parse date into time format
+function parseDate(date) {
+  const parsedDate = parse(date, "yyyy-MM-dd HH:mm", new Date());
+  const formattedDate = format(parsedDate, "HH:mm");
+  return formattedDate;
+}
+
 function processHourlyData(data) {
+  // get local time of the current city
+  const currentTime = parseDate(data.location.localtime);
+
   // grab array of all the hours in the current day
   const hoursArray = data.forecast.forecastday[0].hour;
-  console.log(hoursArray)
 
-  // for each object representing an hour, map over it and transform it into the below object
-  return hoursArray.map((hour) => {
-    return {
-      hour: hour.time,
-      temperature: hour.temp_c,
-    };
-  });
+  // transform each object to the below:
+  return hoursArray
+    .map((hour) => {
+      // only process the hours that are upcoming
+      const currentHour = parseDate(hour.time);
+
+      if (currentHour >= currentTime) {
+        return {
+          hour: currentHour,
+          temperature: hour.temp_c,
+        };
+      }
+    })
+    .filter((hour) => hour !== undefined);
 }
 
 function processWeeklyData(data) {
   // grab array of 7 day forecast
   const weeklyForecast = data.forecast.forecastday;
-  console.log(weeklyForecast)
-  
+
   // for each object representing a day, map over it and transform it into the below object
   return weeklyForecast.map((day) => {
     return {
@@ -53,25 +70,40 @@ function processWeeklyData(data) {
   });
 }
 
-// returns object containing current weather data
+function makeUrl(city, days) {
+  const baseUrl = "https://api.weatherapi.com/v1";
+  const apiKey = "8496bc66c37e43b1a0f180756231805";
+  let url = `${baseUrl}/forecast.json?key=${apiKey}&q=${city}`;
+
+  if (days !== null) {
+    return (url += `&days=${days}`);
+  } else {
+    return url;
+  }
+}
+
+async function fetchAndProcess(url, processor) {
+  try {
+    const data = await fetchData(url);
+    return processor(data);
+  } catch (error) {
+    console.error(`Error fetching or processing data: ${error}`);
+  }
+}
+
 async function getCurrent(city) {
-  const url = `https://api.weatherapi.com/v1/current.json?key=8496bc66c37e43b1a0f180756231805&q=${city}`;
-  const data = await fetchData(url);
-  return processCurrentData(data);
+  const url = makeUrl(city, 1);
+  return fetchAndProcess(url, processCurrentData);
 }
 
-// for each hour, returns an object containing hourly data
 async function getHourly(city) {
-  const url = `https://api.weatherapi.com/v1/forecast.json?key=8496bc66c37e43b1a0f180756231805&q=${city}`;
-  const data = await fetchData(url);
-  return processHourlyData(data);
+  const url = makeUrl(city, 1);
+  return fetchAndProcess(url, processHourlyData);
 }
 
-// fetch weekly forecast
 async function getWeekly(city) {
-  const url = `https://api.weatherapi.com/v1/forecast.json?key=8496bc66c37e43b1a0f180756231805&q=${city}&days=7`;
-  const data = await fetchData(url);
-  return processWeeklyData(data);
+  const url = makeUrl(city, 7);
+  return fetchAndProcess(url, processWeeklyData);
 }
 
 export { getCurrent, getHourly, getWeekly };

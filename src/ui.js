@@ -1,35 +1,33 @@
 import { parse, format } from "date-fns";
 
-function displayCurrent(weatherData) {
+function displayCurrent(currentData) {
   const city = document.getElementById("city");
-  city.textContent = weatherData.location;
+  city.textContent = currentData.location;
 
   const country = document.getElementById("country");
-  country.textContent = weatherData.country;
+  country.textContent = currentData.country;
 
   const localTime = document.getElementById("local-time");
-  const date = weatherData.localTime;
+  const date = currentData.localTime;
   const parsedDate = parse(date, "yyyy-MM-dd HH:mm", new Date());
   let formattedDate = format(parsedDate, "EEEE, do MMMM yyyy, HH:mm");
   localTime.textContent = formattedDate;
 
   const temp = document.getElementById("temp");
-  temp.textContent = `${weatherData.temperature}`;
+  temp.textContent = `${currentData.temperature}°C`;
 
   const condition = document.getElementById("condition");
-  condition.textContent = weatherData.condition;
+  condition.textContent = currentData.condition;
 
   const wind = document.getElementById("wind");
-  wind.textContent = `${weatherData.windSpeed} kph`;
+  wind.textContent = `${currentData.windSpeed} kph`;
 }
 
 // for each hour object, display like so:
 function displayHourly(hourlyData) {
   hourlyData.forEach((hour) => {
     const time = document.createElement("div");
-    const parsedDate = parse(hour.hour, "yyyy-MM-dd HH:mm", new Date());
-    let formattedHour = format(parsedDate, "HH:mm");
-    time.textContent = formattedHour;
+    time.textContent = hour.hour;
 
     const temp = document.createElement("div");
     temp.textContent = `${hour.temperature}°C`;
@@ -38,6 +36,7 @@ function displayHourly(hourlyData) {
     forecastContainer.append(time, temp);
   });
 }
+
 
 // for each day object, display like so:
 function displayWeekly(weeklyData) {

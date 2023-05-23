@@ -37,7 +37,10 @@ async function handleWeatherRequest(city, forecastType) {
   console.log(state)
 }
 
-// handle click events today / this week
+// if a button was clicked inside container,
+// clear the contents and display the current city's data
+// get forecast type from the button's data attribute
+// then call the fetching and displaying function 
 function handleForecastClick(event) {
   if (event.target.tagName === "BUTTON") {
     clearContainer();
@@ -50,4 +53,4 @@ function handleForecastClick(event) {
 // Attach a single event listener to the parent element
 document.getElementById('btn-container').addEventListener('click', handleForecastClick);
 
-export { handleWeatherRequest, state };
+export { handleWeatherRequest };
