@@ -1,6 +1,6 @@
 import { parse, format } from "date-fns";
 
-function displayWeather(weatherData) {
+function displayCurrent(weatherData) {
   const city = document.getElementById("city");
   city.textContent = weatherData.location;
 
@@ -27,17 +27,33 @@ function displayWeather(weatherData) {
 function displayHourly(hourlyData) {
   hourlyData.forEach((hour) => {
     const time = document.createElement("div");
-    const parsedDate = parse(hour.hour, 'yyyy-MM-dd HH:mm', new Date());
-    let formattedHour = format(parsedDate, 'HH:mm');
+    const parsedDate = parse(hour.hour, "yyyy-MM-dd HH:mm", new Date());
+    let formattedHour = format(parsedDate, "HH:mm");
     time.textContent = formattedHour;
 
     const temp = document.createElement("div");
     temp.textContent = `${hour.temperature}°C`;
 
-    const forecastContainer = document.getElementById('forecast-container');
-    
-    forecastContainer.append(time, temp)
+    const forecastContainer = document.getElementById("forecast-container");
+    forecastContainer.append(time, temp);
   });
 }
 
-export { displayWeather, displayHourly };
+// for each day object, display like so:
+function displayWeekly(weeklyData) {
+  weeklyData.forEach((day) => {
+    const dayOfWeek = document.createElement("div");
+    const date = day.date;
+    const parsedDate = parse(date, "yyyy-MM-dd", new Date());
+    let formattedDate = format(parsedDate, "EEEE");
+    dayOfWeek.textContent = formattedDate;
+
+    const temp = document.createElement("div");
+    temp.textContent = `${day.temperature}°C`;
+
+    const forecastContainer = document.getElementById("forecast-container");
+    forecastContainer.append(dayOfWeek, temp);
+  });
+}
+
+export { displayCurrent, displayHourly, displayWeekly };
