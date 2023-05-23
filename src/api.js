@@ -35,26 +35,37 @@ function parseDate(date) {
 }
 
 function processHourlyData(data) {
+  console.log(data);
   // get local time of the current city
   const currentTime = parseDate(data.location.localtime);
 
   // grab array of all the hours in the current day
-  const hoursArray = data.forecast.forecastday[0].hour;
+  const hoursToday = data.forecast.forecastday[0].hour;
+  console.log(hoursToday);
+
+  const hoursTomorrow = data.forecast.forecastday[1].hour;
+  console.log(hoursTomorrow);
+
+  // combine the two arrays into one
+  const hoursArray = hoursToday.concat(hoursTomorrow);
+  console.log(hoursArray);
+
+  // find the index of the current hour
+  const currentIndex = hoursArray.findIndex(
+    (hour) => parseDate(hour.time) >= currentTime
+  );
+
+  // slice the next 12 hours from the array
+  const next12Hours = hoursArray.slice(currentIndex, currentIndex + 12);
 
   // transform each object to the below:
-  return hoursArray
-    .map((hour) => {
-      // only process the hours that are upcoming
-      const currentHour = parseDate(hour.time);
-
-      if (currentHour >= currentTime) {
-        return {
-          hour: currentHour,
-          temperature: hour.temp_c,
-        };
-      }
-    })
-    .filter((hour) => hour !== undefined);
+  return next12Hours.map((hour) => {
+    const currentHour = parseDate(hour.time);
+    return {
+      hour: currentHour,
+      temperature: hour.temp_c,
+    };
+  });
 }
 
 function processWeeklyData(data) {
@@ -97,7 +108,7 @@ async function getCurrent(city) {
 }
 
 async function getHourly(city) {
-  const url = makeUrl(city, 1);
+  const url = makeUrl(city, 2);
   return fetchAndProcess(url, processHourlyData);
 }
 
