@@ -8,6 +8,7 @@ function displayCurrent(currentData) {
   country.textContent = currentData.country;
 
   const localTime = document.getElementById("local-time");
+  // parsing the date in the ui purely for ui purposes 
   const date = currentData.localTime;
   const parsedDate = parse(date, "yyyy-MM-dd HH:mm", new Date());
   let formattedDate = format(parsedDate, "EEEE, do MMMM yyyy, HH:mm");
@@ -20,11 +21,18 @@ function displayCurrent(currentData) {
   condition.textContent = currentData.condition;
 
   const wind = document.getElementById("wind");
-  wind.textContent = `${currentData.windSpeed} kph`;
+  wind.textContent = `Wind ${currentData.windSpeed} kph`;
+
+  const sunrise = document.getElementById('sunrise');
+  sunrise.textContent = `Sunrise ${currentData.sunrise}`
+
+  const sunset = document.getElementById('sunset');
+  sunset.textContent = `Sunset ${currentData.sunset}`
 }
 
 // for each hour object, display like so:
 function displayHourly(hourlyData) {
+  clearContainer();
   hourlyData.forEach((hour) => {
     const time = document.createElement("div");
     time.textContent = hour.hour;
@@ -37,11 +45,12 @@ function displayHourly(hourlyData) {
   });
 }
 
-
 // for each day object, display like so:
 function displayWeekly(weeklyData) {
+  clearContainer();
   weeklyData.forEach((day) => {
     const dayOfWeek = document.createElement("div");
+    // parsing the date in the ui purely for ui purposes 
     const date = day.date;
     const parsedDate = parse(date, "yyyy-MM-dd", new Date());
     let formattedDate = format(parsedDate, "EEEE");
@@ -60,5 +69,7 @@ function clearContainer() {
   const forecastContainer = document.getElementById("forecast-container");
   forecastContainer.innerHTML = "";
 }
+
+
 
 export { displayCurrent, displayHourly, displayWeekly, clearContainer };

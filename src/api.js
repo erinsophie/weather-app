@@ -24,6 +24,8 @@ function processCurrentData(data) {
     temperature: data.current.temp_c,
     condition: data.current.condition.text,
     windSpeed: data.current.wind_kph,
+    sunrise: data.forecast.forecastday[0].astro.sunrise,
+    sunset:data.forecast.forecastday[0].astro.sunset,
   };
 }
 
@@ -39,23 +41,17 @@ function processHourlyData(data) {
   // get local time of the current city
   const currentTime = parseDate(data.location.localtime);
 
-  // grab array of all the hours in the current day
   const hoursToday = data.forecast.forecastday[0].hour;
-  console.log(hoursToday);
-
   const hoursTomorrow = data.forecast.forecastday[1].hour;
-  console.log(hoursTomorrow);
 
-  // combine the two arrays into one
+  // combine the today and tomrrows hours into one
   const hoursArray = hoursToday.concat(hoursTomorrow);
-  console.log(hoursArray);
 
   // find the index of the current hour
   const currentIndex = hoursArray.findIndex(
     (hour) => parseDate(hour.time) >= currentTime
   );
 
-  // slice the next 12 hours from the array
   const next12Hours = hoursArray.slice(currentIndex, currentIndex + 12);
 
   // transform each object to the below:
@@ -98,7 +94,7 @@ async function fetchAndProcess(url, processor) {
     const data = await fetchData(url);
     return processor(data);
   } catch (error) {
-    console.error(`Error fetching or processing data: ${error}`);
+    throw new Error(`Error fetching or processing data: ${error}`);
   }
 }
 
@@ -117,4 +113,6 @@ async function getWeekly(city) {
   return fetchAndProcess(url, processWeeklyData);
 }
 
-export { getCurrent, getHourly, getWeekly };
+
+
+export { getCurrent, getHourly, getWeekly, parseDate };
