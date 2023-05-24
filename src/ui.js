@@ -2,14 +2,12 @@ import { parse, format } from "date-fns";
 import { state } from "./app.js";
 
 function convertToFahrenheit(celsius) {
-  const convertedTemp = (celsius * 9) / 5 + 32;
-  return Math.round(convertedTemp);
+  return (celsius * 9) / 5 + 32;
 }
 
 function displayTemp(data) {
-  return state.isCelsius
-    ? `${data.temperature}°C`
-    : `${convertToFahrenheit(data.temperature)}°F`;
+  const temp = Math.round(data.temperature);
+  return state.isCelsius ? `${temp}°C` : `${convertToFahrenheit(temp)}°F`;
 }
 
 function displayCurrent(currentData) {
@@ -36,10 +34,10 @@ function displayCurrent(currentData) {
   wind.textContent = `Wind ${currentData.windSpeed} kph`;
 
   const sunrise = document.getElementById("sunrise");
-  sunrise.textContent = `Sunrise ${currentData.sunrise}`;
+  sunrise.textContent = `Sunrise at ${currentData.sunrise}`;
 
   const sunset = document.getElementById("sunset");
-  sunset.textContent = `Sunset ${currentData.sunset}`;
+  sunset.textContent = `Sunset at ${currentData.sunset}`;
 }
 
 // for each hour object, display like so:
@@ -48,12 +46,19 @@ function displayHourly(hourlyData) {
   hourlyData.forEach((obj) => {
     const time = document.createElement("div");
     time.textContent = obj.hour;
+    time.classList.add("hour-data");
 
     const temp = document.createElement("div");
     temp.textContent = displayTemp(obj);
+    temp.classList.add("temp-data");
+
+    const container = document.createElement("div");
+    container.classList.add("hours-container");
+    container.append(time, temp);
 
     const forecastContainer = document.getElementById("forecast-container");
-    forecastContainer.append(time, temp);
+
+    forecastContainer.append(container);
   });
 }
 
@@ -67,12 +72,18 @@ function displayWeekly(weeklyData) {
     const parsedDate = parse(date, "yyyy-MM-dd", new Date());
     let formattedDate = format(parsedDate, "EEEE");
     dayOfWeek.textContent = formattedDate;
+    dayOfWeek.classList.add("day-of-week");
 
     const temp = document.createElement("div");
     temp.textContent = displayTemp(day);
+    temp.classList.add("temp-data");
+
+    const container = document.createElement("div");
+    container.classList.add("week-container");
+    container.append(dayOfWeek, temp);
 
     const forecastContainer = document.getElementById("forecast-container");
-    forecastContainer.append(dayOfWeek, temp);
+    forecastContainer.append(container);
   });
 }
 
