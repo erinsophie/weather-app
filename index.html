@@ -18,21 +18,29 @@
     <main>
       <div id="weather-container">
         <div id="container1">
-          <div id="city"></div>
-          <div id="country"></div>
+          <div>
+            <div id="city"></div>
+            <div id="country"></div>
+          </div>
           <div id="local-time"></div>
 
           <div id="temp-and-icon">
             <div id="temp"></div>
             <div id="icon">
-              <img
-                src="img/weather-icons/weather-icons-png/Sunny.png"
-                alt="icon representing weather"
-              />
+              <img src="img/icons/Group 1-2.svg" alt="weather icon" />
             </div>
           </div>
           <div id="condition"></div>
-          <button id="temp-btn">°C / F</button>
+          <div id="temp-btn-container">
+            <button id="temp-btn">°C / F</button>
+          </div>
+
+          <div id="btn-container">
+            <button id="todays-btn" data-forecast-type="hourly">Today</button>
+            <button id="weekly-btn" data-forecast-type="weekly">
+              Next 7 days
+            </button>
+          </div>
         </div>
 
         <div id="container2">
@@ -41,20 +49,15 @@
             <button type="submit" id="search-btn">Search</button>
             <p id="error-msg"></p>
           </form>
-          <div id="wind"></div>
-          <div id="sunrise"></div>
-          <div id="sunset"></div>
+          <div id="container2-data">
+            <div id="wind"></div>
+            <div id="sunrise"></div>
+            <div id="sunset"></div>
+          </div>
         </div>
       </div>
 
-      <div id="btn-container">
-        <button id="todays-btn" data-forecast-type="hourly">Today</button>
-        <button id="weekly-btn" data-forecast-type="weekly">Next 7 days</button>
-      </div>
-
-      <div id="forecast-container">
-        <!--forecast data here-->
-      </div>
+      <div id="forecast-container"></div>
     </main>
     <script src="main.js"></script>
   </body>
