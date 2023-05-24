@@ -82,4 +82,10 @@ function clearContainer() {
   forecastContainer.innerHTML = "";
 }
 
-export { displayCurrent, displayHourly, displayWeekly, clearContainer };
+// handle error 
+function displayError(city) {
+  const errorMsg = document.getElementById('error-msg');
+  errorMsg.textContent = `Sorry, ${city} was not found`
+}
+
+export { displayCurrent, displayHourly, displayWeekly, clearContainer, displayError };

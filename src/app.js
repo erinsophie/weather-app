@@ -4,6 +4,7 @@ import {
   displayHourly,
   displayWeekly,
   clearContainer,
+  displayError,
 } from "./ui.js";
 
 // keep track of current state
@@ -33,15 +34,13 @@ async function handleWeatherRequest(city, forecastType) {
       displayWeekly(weeklyData);
     }
   } catch (error) {
-    throw new Error(`Error: ${error}`);
+    displayError(city);
+    console.error(error);
   }
+
   console.log(state);
 }
 
-// if a button was clicked inside container,
-// clear the contents and display the current city's data
-// get forecast type from the button's data attribute
-// then call the fetching and displaying function
 function handleForecastClick(event) {
   if (event.target.tagName === "BUTTON") {
     clearContainer();
@@ -61,13 +60,16 @@ function searchForCity() {
   const searchInput = document.getElementById("search-box");
   const form = document.getElementById("search-form");
   const searchBtn = document.getElementById("search-btn");
+  const errorMsg = document.getElementById("error-msg");
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
   });
 
-  searchBtn.addEventListener("click", async () => {
+  searchBtn.addEventListener("click", () => {
+    errorMsg.textContent = "";
     handleWeatherRequest(searchInput.value, "hourly");
+    searchInput.value = "";
   });
 }
 

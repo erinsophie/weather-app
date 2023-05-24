@@ -11,7 +11,7 @@ async function fetchData(url) {
       return json;
     }
   } catch (error) {
-    throw new Error(`Error: ${error}`);
+    console.error(error.message);
   }
 }
 
@@ -25,7 +25,7 @@ function processCurrentData(data) {
     condition: data.current.condition.text,
     windSpeed: data.current.wind_kph,
     sunrise: data.forecast.forecastday[0].astro.sunrise,
-    sunset:data.forecast.forecastday[0].astro.sunset,
+    sunset: data.forecast.forecastday[0].astro.sunset,
   };
 }
 
@@ -40,7 +40,6 @@ function processHourlyData(data) {
   console.log(data);
   // get local time of the current city
   const currentTime = parseDate(data.location.localtime);
-
   const hoursToday = data.forecast.forecastday[0].hour;
   const hoursTomorrow = data.forecast.forecastday[1].hour;
 
@@ -53,7 +52,6 @@ function processHourlyData(data) {
   );
 
   const next12Hours = hoursArray.slice(currentIndex, currentIndex + 12);
-
   // transform each object to the below:
   return next12Hours.map((hour) => {
     const currentHour = parseDate(hour.time);
@@ -94,23 +92,23 @@ async function fetchAndProcess(url, processor) {
     const data = await fetchData(url);
     return processor(data);
   } catch (error) {
-    throw new Error(`Error fetching or processing data: ${error}`);
+    console.error(error.message);
   }
 }
 
 async function getCurrent(city) {
   const url = makeUrl(city, 1);
-  return fetchAndProcess(url, processCurrentData);
+  return await fetchAndProcess(url, processCurrentData);
 }
 
 async function getHourly(city) {
   const url = makeUrl(city, 2);
-  return fetchAndProcess(url, processHourlyData);
+  return await fetchAndProcess(url, processHourlyData);
 }
 
 async function getWeekly(city) {
   const url = makeUrl(city, 7);
-  return fetchAndProcess(url, processWeeklyData);
+  return await fetchAndProcess(url, processWeeklyData);
 }
 
 export { getCurrent, getHourly, getWeekly, parseDate };
