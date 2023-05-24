@@ -34,13 +34,26 @@ async function handleWeatherRequest(city, forecastType) {
       displayWeekly(weeklyData);
     }
   } catch (error) {
-    displayError(city);
     console.error(error);
+    handleErrorMsg(error, city);
   }
-
   console.log(state);
 }
 
+// display specific message for error
+function handleErrorMsg(error, city) {
+  if (error.message === "location not found") {
+    displayError(`Sorry, ${city} was not found`);
+  } else if (error.message === "network error") {
+    displayError(
+      "Sorry, something went wrong. Please check your network connection."
+    );
+  } else {
+    displayError("Sorry, an unexpected error occurred. Please try again.");
+  }
+}
+
+// use data index to update forecast
 function handleForecastClick(event) {
   if (event.target.tagName === "BUTTON") {
     clearContainer();

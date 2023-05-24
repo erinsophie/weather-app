@@ -5,16 +5,23 @@ async function fetchData(url) {
   try {
     const response = await fetch(url, { mode: "cors" });
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      if (response.status === 400) {
+        // if location not found throw error
+        throw new Error('location not found');
+      }
+      // if there was a server error throw error
+      throw new Error(`Server error! status: ${response.status}`);
     } else {
       const json = await response.json();
       return json;
     }
   } catch (error) {
-    console.error(error.message);
+    if (error instanceof TypeError) {
+      error.message = "network error";
+    }
+    throw error;
   }
 }
-
 // returns object with weather data
 function processCurrentData(data) {
   return {
@@ -37,7 +44,6 @@ function parseDate(date) {
 }
 
 function processHourlyData(data) {
-  console.log(data);
   // get local time of the current city
   const currentTime = parseDate(data.location.localtime);
   const hoursToday = data.forecast.forecastday[0].hour;
@@ -93,22 +99,23 @@ async function fetchAndProcess(url, processor) {
     return processor(data);
   } catch (error) {
     console.error(error.message);
+    throw error;
   }
 }
 
 async function getCurrent(city) {
   const url = makeUrl(city, 1);
-  return await fetchAndProcess(url, processCurrentData);
+  return fetchAndProcess(url, processCurrentData);
 }
 
 async function getHourly(city) {
   const url = makeUrl(city, 2);
-  return await fetchAndProcess(url, processHourlyData);
+  return fetchAndProcess(url, processHourlyData);
 }
 
 async function getWeekly(city) {
   const url = makeUrl(city, 7);
-  return await fetchAndProcess(url, processWeeklyData);
+  return fetchAndProcess(url, processWeeklyData);
 }
 
 export { getCurrent, getHourly, getWeekly, parseDate };
