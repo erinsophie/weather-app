@@ -85,7 +85,7 @@ function clearContainer() {
 // handle error
 function displayError(message) {
   const errorMsg = document.getElementById("error-msg");
-  errorMsg.textContent = message
+  errorMsg.textContent = message;
 }
 
 export {

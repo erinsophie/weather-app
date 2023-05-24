@@ -47,15 +47,80 @@ h6 {
 /* general */
 
 :root {
-    --white: #ffffff;
-  }
-
+  --white: #ffffff;
+  --light-grey: rgba(220, 220, 220, 0.5);
+  --dark-grey: rgba(117, 117, 117);
+  --small-font: 1rem;
+  --medium-font: 2rem;
+  --large-font: 5rem;
+}
 
 /* main */
 
 body {
+  background-image: url(img/bg.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  color: var(--white);
+  height: 100%;
+  padding: 30px;
+  border: 1px solid red;
+}
+
+/* top container */
+
+#weather-container {
+  display: flex;
+  justify-content: space-between;
+  flex: 7;
+  border: 1px solid red;
+}
+
+#container1 {
+  border: 1px solid red;
+  padding: 10px;
+}
+
+#temp {
+  font-size: var(--large-font);
+}
+
+#container2 {
+  border: 1px solid red;
+  padding: 10px;
+}
+
+/* bottom container */
+
+#forecast-container {
+  display: flex;
+  flex: 3;
+  border: 1px solid red;
+}
+
+/* buttons */
+
+button {
+  background: transparent;
+  border: 1px solid var(--white);
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--light-grey);
+}
+
+/* input */
+
+input#search-box {
+  color: var(--dark-grey);
 }

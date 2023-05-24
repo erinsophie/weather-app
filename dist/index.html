@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,29 +13,49 @@
     />
     <title>Weather App</title>
   </head>
+
   <body>
-    <div id="city"></div>
-    <div id="country"></div>
-    <div id="local-time"></div>
-    <div id="temp"></div>
-    <button id="temp-btn">°C / F</button>
-    <div id="condition"></div>
-    <div id="wind"></div>
-    <div id="sunrise"></div>
-    <div id="sunset"></div>
+    <main>
+      <div id="weather-container">
+        <div id="container1">
+          <div id="city"></div>
+          <div id="country"></div>
+          <div id="local-time"></div>
 
-    <form id="search-form" novalidate action="" method="get">
-      <input type="text" id="search-box" placeholder="Search city..." />
-      <button type='submit' id="search-btn">Search</button>
-      <p id="error-msg"></p>
-    </form>
+          <div id="temp-and-icon">
+            <div id="temp"></div>
+            <div id="icon">
+              <img
+                src="img/weather-icons/weather-icons-png/Sunny.png"
+                alt="icon representing weather"
+              />
+            </div>
+          </div>
+          <div id="condition"></div>
+          <button id="temp-btn">°C / F</button>
+        </div>
 
-    <div id="btn-container">
-      <button id="todays-btn" data-forecast-type="hourly">Today</button>
-      <button id="weekly-btn" data-forecast-type="weekly">Next 7 days</button>
-    </div>
-    <div id="forecast-container"></div>
+        <div id="container2">
+          <form id="search-form" novalidate action="" method="get">
+            <input type="text" id="search-box" placeholder="Search city..." />
+            <button type="submit" id="search-btn">Search</button>
+            <p id="error-msg"></p>
+          </form>
+          <div id="wind"></div>
+          <div id="sunrise"></div>
+          <div id="sunset"></div>
+        </div>
+      </div>
 
+      <div id="btn-container">
+        <button id="todays-btn" data-forecast-type="hourly">Today</button>
+        <button id="weekly-btn" data-forecast-type="weekly">Next 7 days</button>
+      </div>
+
+      <div id="forecast-container">
+        <!--forecast data here-->
+      </div>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>
