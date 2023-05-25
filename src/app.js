@@ -1,11 +1,14 @@
 import { getCurrent, getHourly, getWeekly } from "./api.js";
+import { setupEventHandlers } from "./eventHandlers.js";
 import {
   displayCurrent,
   displayHourly,
   displayWeekly,
-  clearContainer,
   displayError,
 } from "./ui.js";
+
+// set up event handlers
+setupEventHandlers();
 
 // keep track of current state
 const state = {
@@ -14,6 +17,7 @@ const state = {
   isCelsius: true,
 };
 
+// fetch and display data
 async function handleWeatherRequest(city, forecastType) {
   state.currentCity = city;
   state.forecastType = forecastType;
@@ -24,15 +28,13 @@ async function handleWeatherRequest(city, forecastType) {
     displayCurrent(currentData);
 
     if (forecastType === "hourly") {
-      // fetch and display hourly data
       const hourlyData = await getHourly(city);
       displayHourly(hourlyData);
-      console.log(hourlyData);
     } else if (forecastType === "weekly") {
-      // fetch and display weekly data
       const weeklyData = await getWeekly(city);
       displayWeekly(weeklyData);
     }
+    // centralized error handling of fetch errors
   } catch (error) {
     console.error(error);
     handleErrorMsg(error, city);
@@ -53,47 +55,4 @@ function handleErrorMsg(error, city) {
   }
 }
 
-// use data index to update forecast
-function handleForecastClick(event) {
-  if (event.target.tagName === "BUTTON") {
-    clearContainer();
-    let city = state.currentCity;
-    let forecastType = event.target.dataset.forecastType;
-    handleWeatherRequest(city, forecastType);
-  }
-}
-
-// Attach a single event listener to the parent element
-document
-  .getElementById("btn-container")
-  .addEventListener("click", handleForecastClick);
-
-// handle the search for a city
-function searchForCity() {
-  const searchInput = document.getElementById("search-box");
-  const form = document.getElementById("search-form");
-  const searchBtn = document.getElementById("search-btn");
-  const errorMsg = document.getElementById("error-msg");
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-  });
-
-  searchBtn.addEventListener("click", () => {
-    errorMsg.textContent = "";
-    handleWeatherRequest(searchInput.value, "hourly");
-    searchInput.value = "";
-  });
-}
-
-// toggle temp
-function toggleTemperature() {
-  const tempBtn = document.getElementById("temp-btn");
-
-  tempBtn.addEventListener("click", () => {
-    state.isCelsius = !state.isCelsius;
-    handleWeatherRequest(state.currentCity, state.forecastType);
-  });
-}
-
-export { handleWeatherRequest, searchForCity, toggleTemperature, state };
+export { handleWeatherRequest, state };

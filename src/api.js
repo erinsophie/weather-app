@@ -7,7 +7,7 @@ async function fetchData(url) {
     if (!response.ok) {
       if (response.status === 400) {
         // if location not found throw error
-        throw new Error('location not found');
+        throw new Error("location not found");
       }
       // if there was a server error throw error
       throw new Error(`Server error! status: ${response.status}`);
@@ -15,6 +15,7 @@ async function fetchData(url) {
       const json = await response.json();
       return json;
     }
+    // throw error to propegate up to be handled by handleWeatheRequest
   } catch (error) {
     if (error instanceof TypeError) {
       error.message = "network error";
@@ -30,6 +31,7 @@ function processCurrentData(data) {
     localTime: data.location.localtime,
     temperature: data.current.temp_c,
     condition: data.current.condition.text,
+    icon: data.current.condition.icon,
     windSpeed: data.current.wind_kph,
     sunrise: data.forecast.forecastday[0].astro.sunrise,
     sunset: data.forecast.forecastday[0].astro.sunset,
@@ -57,6 +59,7 @@ function processHourlyData(data) {
     (hour) => parseDate(hour.time) >= currentTime
   );
 
+  // only show data from the current hour onwards
   const next12Hours = hoursArray.slice(currentIndex, currentIndex + 12);
   // transform each object to the below:
   return next12Hours.map((hour) => {
@@ -64,19 +67,22 @@ function processHourlyData(data) {
     return {
       hour: currentHour,
       temperature: hour.temp_c,
+      icon: hour.condition.icon,
     };
   });
 }
 
 function processWeeklyData(data) {
-  // grab array of 7 day forecast
-  const weeklyForecast = data.forecast.forecastday;
+  // array of next 7 days
+  const weeklyForecast = data.forecast.forecastday.slice(1);
+  console.log(weeklyForecast);
 
-  // for each object representing a day, map over it and transform it into the below object
+  // transform each object to the below:
   return weeklyForecast.map((day) => {
     return {
       date: day.date,
       temperature: day.day.avgtemp_c,
+      icon: day.day.condition.icon,
     };
   });
 }
@@ -84,13 +90,8 @@ function processWeeklyData(data) {
 function makeUrl(city, days) {
   const baseUrl = "https://api.weatherapi.com/v1";
   const apiKey = "8496bc66c37e43b1a0f180756231805";
-  let url = `${baseUrl}/forecast.json?key=${apiKey}&q=${city}`;
-
-  if (days !== null) {
-    return (url += `&days=${days}`);
-  } else {
-    return url;
-  }
+  let url = `${baseUrl}/forecast.json?key=${apiKey}&q=${city}&days=${days}`;
+  return url;
 }
 
 async function fetchAndProcess(url, processor) {
@@ -114,7 +115,7 @@ async function getHourly(city) {
 }
 
 async function getWeekly(city) {
-  const url = makeUrl(city, 7);
+  const url = makeUrl(city, 8);
   return fetchAndProcess(url, processWeeklyData);
 }
 

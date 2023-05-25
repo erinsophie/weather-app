@@ -27,6 +27,9 @@ function displayCurrent(currentData) {
   const temp = document.getElementById("temp");
   temp.textContent = displayTemp(currentData);
 
+  const icon = document.querySelector(".icon");
+  icon.src = `https:${currentData.icon}`;
+
   const condition = document.getElementById("condition");
   condition.textContent = currentData.condition;
 
@@ -48,13 +51,17 @@ function displayHourly(hourlyData) {
     time.textContent = obj.hour;
     time.classList.add("hour-data");
 
+    const icon = document.createElement("img");
+    icon.classList.add("icon");
+    icon.src = `https:${obj.icon}`;
+
     const temp = document.createElement("div");
     temp.textContent = displayTemp(obj);
     temp.classList.add("temp-data");
 
     const container = document.createElement("div");
     container.classList.add("hours-container");
-    container.append(time, temp);
+    container.append(time, icon, temp);
 
     const forecastContainer = document.getElementById("forecast-container");
 
@@ -78,9 +85,13 @@ function displayWeekly(weeklyData) {
     temp.textContent = displayTemp(day);
     temp.classList.add("temp-data");
 
+    const icon = document.createElement("img");
+    icon.classList.add("icon");
+    icon.src = `https:${day.icon}`;
+
     const container = document.createElement("div");
     container.classList.add("week-container");
-    container.append(dayOfWeek, temp);
+    container.append(dayOfWeek, icon, temp);
 
     const forecastContainer = document.getElementById("forecast-container");
     forecastContainer.append(container);
