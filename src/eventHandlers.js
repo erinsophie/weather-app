@@ -1,5 +1,5 @@
 import { handleWeatherRequest, state } from "./app.js";
-import { clearContainer } from "./ui.js";
+import { clearContainer, highlightBtn } from "./ui.js";
 
 // use data index to update forecast
 function handleForecastClick() {
@@ -11,6 +11,7 @@ function handleForecastClick() {
       let city = state.currentCity;
       let forecastType = event.target.dataset.forecastType;
       handleWeatherRequest(city, forecastType);
+      highlightBtn();
     }
   });
 }
@@ -28,6 +29,9 @@ function searchForCity() {
 
   searchBtn.addEventListener("click", () => {
     errorMsg.textContent = "";
+    if (searchInput.value === "") {
+      return;
+    }
     handleWeatherRequest(searchInput.value, "hourly");
     searchInput.value = "";
   });

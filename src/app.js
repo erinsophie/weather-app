@@ -5,6 +5,7 @@ import {
   displayHourly,
   displayWeekly,
   displayError,
+  highlightBtn,
 } from "./ui.js";
 
 // set up event handlers
@@ -16,6 +17,8 @@ const state = {
   forecastType: "hourly",
   isCelsius: true,
 };
+
+highlightBtn();
 
 // fetch and display data
 async function handleWeatherRequest(city, forecastType) {

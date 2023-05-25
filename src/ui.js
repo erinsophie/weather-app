@@ -37,10 +37,10 @@ function displayCurrent(currentData) {
   wind.textContent = `Wind ${currentData.windSpeed} kph`;
 
   const sunrise = document.getElementById("sunrise");
-  sunrise.textContent = `Sunrise at ${currentData.sunrise}`;
+  sunrise.textContent = `Sunrise ${currentData.sunrise}`;
 
   const sunset = document.getElementById("sunset");
-  sunset.textContent = `Sunset at ${currentData.sunset}`;
+  sunset.textContent = `Sunset ${currentData.sunset}`;
 }
 
 // for each hour object, display like so:
@@ -110,10 +110,25 @@ function displayError(message) {
   errorMsg.textContent = message;
 }
 
+// highlight selected button
+function highlightBtn() {
+  const todayBtn = document.getElementById("todays-btn");
+  const weeklyBtn = document.getElementById("weekly-btn");
+
+  if (state.forecastType === "hourly") {
+    todayBtn.classList.add("forecast-selected");
+    weeklyBtn.classList.remove("forecast-selected");
+  } else {
+    weeklyBtn.classList.add("forecast-selected");
+    todayBtn.classList.remove("forecast-selected");
+  }
+}
+
 export {
   displayCurrent,
   displayHourly,
   displayWeekly,
   clearContainer,
   displayError,
+  highlightBtn,
 };
