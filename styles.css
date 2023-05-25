@@ -76,6 +76,7 @@ main {
 #weather-container {
   display: flex;
   justify-content: space-between;
+  border: 1px solid red;
 }
 
 /* container 1 */
@@ -88,10 +89,11 @@ main {
 
 #temp-and-icon {
   display: flex;
+  border: 1px solid red;
 }
 
 #temp {
-  font-size: 5rem;
+  font-size: 6rem;
 }
 
 #city {
@@ -107,8 +109,13 @@ main {
   font-size: 1rem;
 }
 
-#icon {
-  width: 80px;
+#icon-container {
+  width: 100px;
+  border: 1px solid red;
+}
+
+.icon {
+  border: 1px solid red;
 }
 
 /* container 2 */
@@ -136,6 +143,7 @@ hr {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  border: 1px solid red;
 }
 
 .hours-container,

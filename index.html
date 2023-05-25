@@ -26,20 +26,13 @@
 
           <div id="temp-and-icon">
             <div id="temp"></div>
-            <div id="icon">
-              <img src="img/icons/Group 1-2.svg" alt="weather icon" />
+            <div id="icon-container">
+              <img class="icon" src="" alt="weather icon" />
             </div>
           </div>
           <div id="condition"></div>
           <div id="temp-btn-container">
             <button id="temp-btn">°C / F</button>
-          </div>
-
-          <div id="btn-container">
-            <button id="todays-btn" data-forecast-type="hourly">Today</button>
-            <button id="weekly-btn" data-forecast-type="weekly">
-              Next 7 days
-            </button>
           </div>
         </div>
 
@@ -57,7 +50,15 @@
         </div>
       </div>
 
-      <div id="forecast-container"></div>
+      <div>
+        <div id="btn-container">
+          <button id="todays-btn" data-forecast-type="hourly">Today</button>
+          <button id="weekly-btn" data-forecast-type="weekly">
+            Next 7 days
+          </button>
+        </div>
+        <div id="forecast-container"></div>
+      </div>
     </main>
     <script src="main.js"></script>
   </body>
