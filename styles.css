@@ -49,7 +49,6 @@ h6 {
 :root {
   --white: #ffffff;
   --light-grey: rgba(220, 220, 220, 0.5);
-  --dark-grey: rgba(117, 117, 117);
 }
 
 /* main */
@@ -67,7 +66,8 @@ main {
   flex-direction: column;
   color: var(--white);
   height: 100%;
-  padding: 50px;
+  padding: 60px;
+  font-size: 1rem;
   justify-content: space-between;
 }
 
@@ -76,7 +76,6 @@ main {
 #weather-container {
   display: flex;
   justify-content: space-between;
-  border: 1px solid red;
 }
 
 /* container 1 */
@@ -84,12 +83,18 @@ main {
 #container1 {
   display: flex;
   flex-direction: column;
-  gap: 5px;
 }
 
 #temp-and-icon {
   display: flex;
-  border: 1px solid red;
+}
+
+#icon-container {
+  width: 120px;
+}
+
+#main-icon {
+  width: 100px;
 }
 
 #temp {
@@ -105,19 +110,6 @@ main {
   font-size: 1.5rem;
 }
 
-#localtime {
-  font-size: 1rem;
-}
-
-#icon-container {
-  width: 100px;
-  border: 1px solid red;
-}
-
-.icon {
-  border: 1px solid red;
-}
-
 /* container 2 */
 
 #container2 {
@@ -126,24 +118,47 @@ main {
   gap: 30px;
 }
 
+form {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 #container2-data {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-size: 1.7rem;
+  font-size: 1.8rem;
 }
 
-hr {
-  color: var(--light-grey);
+#container2-data > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 /* bottom container */
+
+#bottom-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
 #forecast-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  border: 1px solid red;
+}
+
+.icon {
+  width: 70px;
 }
 
 .hours-container,
@@ -155,12 +170,12 @@ hr {
 }
 
 .temp-data {
-  font-size: 2.2rem;
   font-weight: bold;
 }
 
 .day-of-week,
-.hour-data {
+.hour-data,
+.temp-data {
   font-size: 1.5rem;
 }
 
@@ -168,14 +183,19 @@ hr {
 
 button {
   background: transparent;
-  border: 1px solid var(--white);
+  cursor: pointer;
+  border: none;
   border-radius: 5px;
   padding: 5px;
-  cursor: pointer;
 }
 
-button:hover {
-  background-color: var(--light-grey);
+#btn-container {
+  display: flex;
+  gap: 10px;
+}
+
+.forecast-selected {
+  border: 2px solid var(--white);
 }
 
 /* input */
@@ -183,6 +203,7 @@ button:hover {
 input#search-box {
   background: transparent;
   border: none;
+  font-size: 1.3rem;
   border-bottom: 1px solid var(--white);
 }
 
@@ -192,4 +213,10 @@ input#search-box::placeholder {
 
 input#search-box:focus {
   outline: none;
+}
+
+/* desktop layout */
+
+@media (min-width: 700px) {
+  
 }

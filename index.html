@@ -11,23 +11,29 @@
       href="https://fonts.googleapis.com/css2?family=Manrope&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Weather App</title>
   </head>
 
   <body>
     <main>
+      <!--top container-->
       <div id="weather-container">
+        <!--container 1-->
         <div id="container1">
-          <div>
-            <div id="city"></div>
-            <div id="country"></div>
-          </div>
+          <div id="city"></div>
+          <div id="country"></div>
           <div id="local-time"></div>
-
           <div id="temp-and-icon">
             <div id="temp"></div>
             <div id="icon-container">
-              <img class="icon" src="" alt="weather icon" />
+              <img class="icon" id="main-icon" src="" alt="weather icon" />
             </div>
           </div>
           <div id="condition"></div>
@@ -36,27 +42,45 @@
           </div>
         </div>
 
+        <!--container 2-->
         <div id="container2">
-          <form id="search-form" novalidate action="" method="get">
-            <input type="text" id="search-box" placeholder="Search city..." />
-            <button type="submit" id="search-btn">Search</button>
-            <p id="error-msg"></p>
-          </form>
+          <!--search box-->
+          <div id="form-container">
+            <form id="search-form" novalidate action="" method="get">
+              <input type="text" id="search-box" placeholder="Search city..." />
+              <button type="submit" id="search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
+          <p id="error-msg"></p>
+          </div>
+          <!--container 2 data-->
           <div id="container2-data">
-            <div id="wind"></div>
-            <div id="sunrise"></div>
-            <div id="sunset"></div>
+            <div>
+              <i class="fa-solid fa-wind"></i>
+              <div id="wind"></div>
+            </div>
+            <div>
+              <i class="fa-solid fa-sun"></i>
+              <div id="sunrise"></div>
+            </div>
+            <div>
+              <i class="fa-solid fa-moon"></i>
+              <div id="sunset"></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div>
+      <!--bottom container-->
+      <div id="bottom-container">
         <div id="btn-container">
           <button id="todays-btn" data-forecast-type="hourly">Today</button>
           <button id="weekly-btn" data-forecast-type="weekly">
             Next 7 days
           </button>
         </div>
+        <!--forecast-->
         <div id="forecast-container"></div>
       </div>
     </main>
