@@ -65,17 +65,18 @@ main {
   display: flex;
   flex-direction: column;
   color: var(--white);
-  height: 100%;
-  padding: 60px;
+  padding: 5%;
   font-size: 1rem;
-  justify-content: space-between;
+  gap: 30px;
 }
 
 /* top container */
 
 #weather-container {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-direction: column;
 }
 
 /* container 1 */
@@ -83,6 +84,7 @@ main {
 #container1 {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 #temp-and-icon {
@@ -118,11 +120,6 @@ main {
   gap: 30px;
 }
 
-form {
-  display: flex;
-  justify-content: flex-end;
-}
-
 #form-container {
   display: flex;
   flex-direction: column;
@@ -133,14 +130,14 @@ form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
 }
 
-#container2-data > div {
+.right-side-data {
   display: flex;
   gap: 10px;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 /* bottom container */
@@ -152,9 +149,9 @@ form {
 }
 
 #forecast-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 20px;
 }
 
 .icon {
@@ -165,18 +162,21 @@ form {
 .week-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   align-items: center;
+  justify-content: center;
+  background-color: var(--light-grey);
+  border-radius: 10px;
+  padding: 10%;
 }
 
 .temp-data {
+  font-size: 1.3rem;
   font-weight: bold;
 }
 
 .day-of-week,
-.hour-data,
-.temp-data {
-  font-size: 1.5rem;
+.hour-data {
+  font-size: 1.1rem;
 }
 
 /* buttons */
@@ -218,5 +218,48 @@ input#search-box:focus {
 /* desktop layout */
 
 @media (min-width: 700px) {
-  
+  main {
+    justify-content: space-between;
+    gap: 0;
+    padding: 60px;
+    height: 100%;
+  }
+
+  #weather-container {
+    gap: 0;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  #container2-data {
+    font-size: 1.7rem;
+  }
+
+  .right-side-data {
+    justify-content: flex-end;
+  }
+
+  #forecast-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .hours-container,
+  .week-container {
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .temp-data {
+    font-size: 1.7rem;
+    font-weight: bold;
+  }
+
+  .day-of-week,
+  .hour-data {
+    font-size: 1.4rem;
+  }
 }

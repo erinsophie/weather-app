@@ -34,6 +34,7 @@ function searchForCity() {
     }
     handleWeatherRequest(searchInput.value, "hourly");
     searchInput.value = "";
+    highlightBtn();
   });
 }
 
