@@ -65,8 +65,9 @@ main {
   display: flex;
   flex-direction: column;
   color: var(--white);
-  padding: 5%;
   font-size: 1rem;
+  padding: 5%;
+  padding-top: 30%;
   gap: 30px;
 }
 
@@ -74,9 +75,9 @@ main {
 
 #weather-container {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 10px;
-  flex-direction: column;
 }
 
 /* container 1 */
@@ -100,25 +101,23 @@ main {
 }
 
 #temp {
-  font-size: 6rem;
+  font-size: 7rem;
 }
 
 #city {
-  font-size: 2.2rem;
+  font-size: 2.8rem;
 }
 
 #country,
 #condition {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+}
+
+#local-time {
+  font-size: 1.3rem;
 }
 
 /* container 2 */
-
-#container2 {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
 
 #form-container {
   display: flex;
@@ -127,17 +126,7 @@ main {
 }
 
 #container2-data {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 1.2rem;
-}
-
-.right-side-data {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: flex-start;
+  display: none;
 }
 
 /* bottom container */
@@ -217,11 +206,12 @@ input#search-box:focus {
 
 /* desktop layout */
 
-@media (min-width: 700px) {
+@media (min-width: 1024px) {
   main {
     justify-content: space-between;
     gap: 0;
     padding: 60px;
+    padding-top: 60px;
     height: 100%;
   }
 
@@ -231,11 +221,40 @@ input#search-box:focus {
     justify-content: space-between;
   }
 
+  #temp {
+    font-size: 6rem;
+  }
+
+  #city {
+    font-size: 2.2rem;
+  }
+
+  #country,
+  #condition {
+    font-size: 1.5rem;
+  }
+
+  #local-time {
+    font-size: 1rem;
+  }
+
+  #container2 {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
   #container2-data {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     font-size: 1.7rem;
   }
 
   .right-side-data {
+    display: flex;
+    gap: 10px;
+    align-items: center;
     justify-content: flex-end;
   }
 
@@ -255,7 +274,6 @@ input#search-box:focus {
 
   .temp-data {
     font-size: 1.7rem;
-    font-weight: bold;
   }
 
   .day-of-week,
