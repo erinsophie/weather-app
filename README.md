@@ -2,8 +2,8 @@
 
 ## [Live Demo](https://erinsophie.github.io/weather-app/)
 
-![Admin Dashboard](images/app-layout.png)
-![Admin Dashboard](images/weather-app.png)
+![Mobile App](dist/img/app-layout.png)
+![Weather App](dist/img/weather-app.png)
 
 # Technologies Used
 
