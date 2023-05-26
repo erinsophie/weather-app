@@ -210,8 +210,7 @@ input#search-box:focus {
   main {
     justify-content: space-between;
     gap: 0;
-    padding: 60px;
-    padding-top: 60px;
+    padding-top: 5%;
     height: 100%;
   }
 
