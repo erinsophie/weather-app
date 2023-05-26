@@ -1,13 +1,13 @@
-import { parse, format } from "date-fns";
+import { parse, format } from 'date-fns';
 
 // returns json-parsed data
 async function fetchData(url) {
   try {
-    const response = await fetch(url, { mode: "cors" });
+    const response = await fetch(url, { mode: 'cors' });
     if (!response.ok) {
       if (response.status === 400) {
         // if location not found throw error
-        throw new Error("location not found");
+        throw new Error('location not found');
       }
       // if there was a server error throw error
       throw new Error(`Server error! status: ${response.status}`);
@@ -18,7 +18,7 @@ async function fetchData(url) {
     // throw error to propegate up to be handled by handleWeatheRequest
   } catch (error) {
     if (error instanceof TypeError) {
-      error.message = "network error";
+      error.message = 'network error';
     }
     throw error;
   }
@@ -40,8 +40,8 @@ function processCurrentData(data) {
 
 // parse date into time format
 function parseDate(date) {
-  const parsedDate = parse(date, "yyyy-MM-dd HH:mm", new Date());
-  const formattedDate = format(parsedDate, "HH:mm");
+  const parsedDate = parse(date, 'yyyy-MM-dd HH:mm', new Date());
+  const formattedDate = format(parsedDate, 'HH:mm');
   return formattedDate;
 }
 
@@ -78,19 +78,17 @@ function processWeeklyData(data) {
   console.log(weeklyForecast);
 
   // transform each object to the below:
-  return weeklyForecast.map((day) => {
-    return {
-      date: day.date,
-      temperature: day.day.avgtemp_c,
-      icon: day.day.condition.icon,
-    };
-  });
+  return weeklyForecast.map((day) => ({
+    date: day.date,
+    temperature: day.day.avgtemp_c,
+    icon: day.day.condition.icon,
+  }));
 }
 
 function makeUrl(city, days) {
-  const baseUrl = "https://api.weatherapi.com/v1";
-  const apiKey = "8496bc66c37e43b1a0f180756231805";
-  let url = `${baseUrl}/forecast.json?key=${apiKey}&q=${city}&days=${days}`;
+  const baseUrl = 'https://api.weatherapi.com/v1';
+  const apiKey = '8496bc66c37e43b1a0f180756231805';
+  const url = `${baseUrl}/forecast.json?key=${apiKey}&q=${city}&days=${days}`;
   return url;
 }
 

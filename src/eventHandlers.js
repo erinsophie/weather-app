@@ -1,12 +1,12 @@
-import { handleWeatherRequest, state } from "./app.js";
-import { clearContainer, highlightBtn } from "./ui.js";
+import { handleWeatherRequest, state } from './app.js';
+import { clearContainer, highlightBtn } from './ui.js';
 
 // use data index to update forecast
 function handleForecastClick() {
-  const forecastBtnContainer = document.getElementById("btn-container");
+  const forecastBtnContainer = document.getElementById('btn-container');
 
-  forecastBtnContainer.addEventListener("click", (event) => {
-    if (event.target.tagName === "BUTTON") {
+  forecastBtnContainer.addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
       clearContainer();
       let city = state.currentCity;
       let forecastType = event.target.dataset.forecastType;
@@ -18,31 +18,31 @@ function handleForecastClick() {
 
 // handle search input
 function searchForCity() {
-  const searchInput = document.getElementById("search-box");
-  const form = document.getElementById("search-form");
-  const searchBtn = document.getElementById("search-btn");
-  const errorMsg = document.getElementById("error-msg");
+  const searchInput = document.getElementById('search-box');
+  const form = document.getElementById('search-form');
+  const searchBtn = document.getElementById('search-btn');
+  const errorMsg = document.getElementById('error-msg');
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener('submit', (event) => {
     event.preventDefault();
   });
 
-  searchBtn.addEventListener("click", () => {
-    errorMsg.textContent = "";
-    if (searchInput.value === "") {
+  searchBtn.addEventListener('click', () => {
+    errorMsg.textContent = '';
+    if (searchInput.value === '') {
       return;
     }
-    handleWeatherRequest(searchInput.value, "hourly");
-    searchInput.value = "";
+    handleWeatherRequest(searchInput.value, 'hourly');
+    searchInput.value = '';
     highlightBtn();
   });
 }
 
 // toggle temp
 function toggleTemperature() {
-  const tempBtn = document.getElementById("temp-btn");
+  const tempBtn = document.getElementById('temp-btn');
 
-  tempBtn.addEventListener("click", () => {
+  tempBtn.addEventListener('click', () => {
     state.isCelsius = !state.isCelsius;
     handleWeatherRequest(state.currentCity, state.forecastType);
   });

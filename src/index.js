@@ -1,6 +1,6 @@
-import { handleWeatherRequest } from "./app.js";
+import { handleWeatherRequest } from './app.js';
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener('DOMContentLoaded', () => {
   // load paris data by default
-  handleWeatherRequest("paris", "hourly");
+  handleWeatherRequest('paris', 'hourly');
 });
