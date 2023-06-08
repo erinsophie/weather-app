@@ -73,8 +73,8 @@ function processHourlyData(data) {
 }
 
 function processWeeklyData(data) {
-  // array of next 7 days
-  const weeklyForecast = data.forecast.forecastday.slice(1);
+  // array of next 3 days
+  const weeklyForecast = data.forecast.forecastday;
   console.log(weeklyForecast);
 
   // transform each object to the below:
@@ -113,7 +113,7 @@ async function getHourly(city) {
 }
 
 async function getWeekly(city) {
-  const url = makeUrl(city, 8);
+  const url = makeUrl(city, 3);
   return fetchAndProcess(url, processWeeklyData);
 }
 
