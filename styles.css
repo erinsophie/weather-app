@@ -73,7 +73,7 @@ main {
 
 /* top container */
 
-#weather-container {
+.weather-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -82,62 +82,62 @@ main {
 
 /* container 1 */
 
-#container1 {
+.container1 {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
 
-#temp-and-icon {
+.temp-and-icon {
   display: flex;
 }
 
-#icon-container {
+.icon-container {
   width: 120px;
 }
 
-#main-icon {
+.main-icon {
   width: 100px;
 }
 
-#temp {
+.temp {
   font-size: 7rem;
 }
 
-#city {
+.city {
   font-size: 2.8rem;
 }
 
-#country,
-#condition {
+.country,
+.condition {
   font-size: 1.8rem;
 }
 
-#local-time {
+.local-time {
   font-size: 1.3rem;
 }
 
 /* container 2 */
 
-#form-container {
+.form-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-#container2-data {
+.container2-data {
   display: none;
 }
 
 /* bottom container */
 
-#bottom-container {
+.bottom-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-#forecast-container {
+.forecast-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 20px;
@@ -178,7 +178,7 @@ button {
   padding: 5px;
 }
 
-#btn-container {
+.btn-container {
   display: flex;
   gap: 10px;
 }
@@ -189,18 +189,18 @@ button {
 
 /* input */
 
-input#search-box {
+input.search-box {
   background: transparent;
   border: none;
   font-size: 1.3rem;
   border-bottom: 1px solid var(--white);
 }
 
-input#search-box::placeholder {
+input.search-box::placeholder {
   color: var(--white);
 }
 
-input#search-box:focus {
+input.search-box:focus {
   outline: none;
 }
 
@@ -215,36 +215,36 @@ input#search-box:focus {
     height: 100%;
   }
 
-  #weather-container {
+  .weather-container {
     gap: 0;
     flex-direction: row;
     justify-content: space-between;
   }
 
-  #temp {
+  .temp {
     font-size: 6rem;
   }
 
-  #city {
+  .city {
     font-size: 2.2rem;
   }
 
-  #country,
-  #condition {
+  .country,
+  .condition {
     font-size: 1.5rem;
   }
 
-  #local-time {
+  .local-time {
     font-size: 1rem;
   }
 
-  #container2 {
+  .container2 {
     display: flex;
     flex-direction: column;
     gap: 30px;
   }
 
-  #container2-data {
+  .container2-data {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -258,7 +258,7 @@ input#search-box:focus {
     justify-content: flex-end;
   }
 
-  #forecast-container {
+  .forecast-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;

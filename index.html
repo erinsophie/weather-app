@@ -25,65 +25,65 @@
   <body>
     <main>
       <!--top container-->
-      <div id="weather-container">
+      <div class="weather-container">
         <!--container 1-->
-        <div id="container1">
-          <div id="city"></div>
-          <div id="country"></div>
-          <div id="local-time"></div>
-          <div id="temp-and-icon">
-            <div id="temp"></div>
-            <div id="icon-container">
-              <img class="icon" id="main-icon" src="" alt="weather icon" />
+        <div class="container1">
+          <div class="city"></div>
+          <div class="country"></div>
+          <div class="local-time"></div>
+          <div class="temp-and-icon">
+            <div class="temp"></div>
+            <div class="icon-container">
+              <img class="icon" class="main-icon" src="" alt="weather icon" />
             </div>
           </div>
-          <div id="condition"></div>
-          <div id="temp-btn-container">
-            <button id="temp-btn">°C / F</button>
+          <div class="condition"></div>
+          <div class="temp-btn-container">
+            <button class="temp-btn">°C / F</button>
           </div>
         </div>
 
         <!--container 2-->
-        <div id="container2">
+        <div class="container2">
           <!--search box-->
-          <div id="form-container">
-            <form id="search-form" novalidate action="" method="get">
-              <input type="text" id="search-box" placeholder="Search city..." />
-              <button type="submit" id="search-btn">
+          <div class="form-container">
+            <form class="search-form" novalidate action="" method="get">
+              <input type="text" class="search-box" placeholder="Search city..." />
+              <button type="submit" class="search-btn">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </form>
-            <p id="error-msg"></p>
+            <p class="error-msg"></p>
           </div>
           <!--container 2 data-->
-          <div id="container2-data">
+          <div class="container2-data">
             <div class="right-side-data">
               <i class="fa-solid fa-wind"></i>
-              <div id="wind"></div>
+              <div class="wind"></div>
             </div>
             <div class="right-side-data">
               <i class="fa-solid fa-sun"></i>
-              <div id="sunrise"></div>
+              <div class="sunrise"></div>
             </div>
             <div class="right-side-data">
               <i class="fa-solid fa-moon"></i>
-              <div id="sunset"></div>
+              <div class="sunset"></div>
             </div>
           </div>
         </div>
       </div>
 
       <!--bottom container-->
-      <div id="bottom-container">
+      <div class="bottom-container">
         <!-- forecast buttons -->
-        <div id="btn-container">
-          <button id="todays-btn" data-forecast-type="hourly">Today</button>
-          <button id="weekly-btn" data-forecast-type="weekly">
+        <div class="btn-container">
+          <button class="todays-btn" data-forecast-type="hourly">Today</button>
+          <button class="weekly-btn" data-forecast-type="weekly">
             Next 3 days
           </button>
         </div>
         <!--forecast-->
-        <div id="forecast-container"></div>
+        <div class="forecast-container"></div>
       </div>
     </main>
     <script src="main.js"></script>
