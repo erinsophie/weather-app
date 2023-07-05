@@ -3,7 +3,7 @@ import { clearContainer, highlightBtn } from './ui.js';
 
 // use data index to update forecast
 function handleForecastClick() {
-  const forecastBtnContainer = document.getElementById('btn-container');
+  const forecastBtnContainer = document.querySelector('.btn-container');
 
   forecastBtnContainer.addEventListener('click', (event) => {
     if (event.target.tagName === 'BUTTON') {
@@ -18,10 +18,10 @@ function handleForecastClick() {
 
 // handle search input
 function searchForCity() {
-  const searchInput = document.getElementById('search-box');
-  const form = document.getElementById('search-form');
-  const searchBtn = document.getElementById('search-btn');
-  const errorMsg = document.getElementById('error-msg');
+  const searchInput = document.querySelector('.search-box');
+  const form = document.querySelector('.search-form');
+  const searchBtn = document.querySelector('.search-btn');
+  const errorMsg = document.querySelector('.error-msg');
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -40,7 +40,7 @@ function searchForCity() {
 
 // toggle temp
 function toggleTemperature() {
-  const tempBtn = document.getElementById('temp-btn');
+  const tempBtn = document.querySelector('.temp-btn');
 
   tempBtn.addEventListener('click', () => {
     state.isCelsius = !state.isCelsius;

@@ -11,35 +11,35 @@ function displayTemp(data) {
 }
 
 function displayCurrent(currentData) {
-  const city = document.getElementById('city');
+  const city = document.querySelector('.city');
   city.textContent = currentData.location;
 
-  const country = document.getElementById('country');
+  const country = document.querySelector('.country');
   country.textContent = currentData.country;
 
-  const localTime = document.getElementById('local-time');
+  const localTime = document.querySelector('.local-time');
   // parsing the date in the ui purely for ui purposes
   const date = currentData.localTime;
   const parsedDate = parse(date, 'yyyy-MM-dd HH:mm', new Date());
   let formattedDate = format(parsedDate, 'EEEE, do MMMM yyyy, HH:mm');
   localTime.textContent = formattedDate;
 
-  const temp = document.getElementById('temp');
+  const temp = document.querySelector('.temp');
   temp.textContent = displayTemp(currentData);
 
   const icon = document.querySelector('.icon');
   icon.src = `https:${currentData.icon}`;
 
-  const condition = document.getElementById('condition');
+  const condition = document.querySelector('.condition');
   condition.textContent = currentData.condition;
 
-  const wind = document.getElementById('wind');
+  const wind = document.querySelector('.wind');
   wind.textContent = `Wind ${currentData.windSpeed} kph`;
 
-  const sunrise = document.getElementById('sunrise');
+  const sunrise = document.querySelector('.sunrise');
   sunrise.textContent = `Sunrise ${currentData.sunrise}`;
 
-  const sunset = document.getElementById('sunset');
+  const sunset = document.querySelector('.sunset');
   sunset.textContent = `Sunset ${currentData.sunset}`;
 }
 
@@ -63,7 +63,7 @@ function displayHourly(hourlyData) {
     container.classList.add('hours-container');
     container.append(time, icon, temp);
 
-    const forecastContainer = document.getElementById('forecast-container');
+    const forecastContainer = document.querySelector('.forecast-container');
 
     forecastContainer.append(container);
   });
@@ -93,27 +93,27 @@ function displayWeekly(weeklyData) {
     container.classList.add('week-container');
     container.append(dayOfWeek, icon, temp);
 
-    const forecastContainer = document.getElementById('forecast-container');
+    const forecastContainer = document.querySelector('.forecast-container');
     forecastContainer.append(container);
   });
 }
 
 // clear forecast container
 function clearContainer() {
-  const forecastContainer = document.getElementById('forecast-container');
+  const forecastContainer = document.querySelector('.forecast-container');
   forecastContainer.innerHTML = '';
 }
 
 // handle error
 function displayError(message) {
-  const errorMsg = document.getElementById('error-msg');
+  const errorMsg = document.querySelector('.error-msg');
   errorMsg.textContent = message;
 }
 
 // highlight selected button
 function highlightBtn() {
-  const todayBtn = document.getElementById('todays-btn');
-  const weeklyBtn = document.getElementById('weekly-btn');
+  const todayBtn = document.querySelector('.todays-btn');
+  const weeklyBtn = document.querySelector('.weekly-btn');
 
   if (state.forecastType === 'hourly') {
     todayBtn.classList.add('forecast-selected');
