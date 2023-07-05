@@ -1,5 +1,5 @@
-import { handleWeatherRequest, state } from './app.js';
-import { clearContainer, highlightBtn } from './ui.js';
+import { handleWeatherRequest, state } from './app';
+import { clearContainer, highlightBtn } from './ui';
 
 // use data index to update forecast
 function handleForecastClick() {

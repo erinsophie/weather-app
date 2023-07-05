@@ -1,5 +1,5 @@
 import { parse, format } from 'date-fns';
-import { state } from './app.js';
+import { state } from './app';
 
 function convertToFahrenheit(celsius) {
   return (celsius * 9) / 5 + 32;

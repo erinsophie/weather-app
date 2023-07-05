@@ -1,12 +1,12 @@
-import { getCurrent, getHourly, getWeekly } from './api.js';
-import { setupEventHandlers } from './eventHandlers.js';
+import { getCurrent, getHourly, getWeekly } from './api';
+import { setupEventHandlers } from './eventHandlers';
 import {
   displayCurrent,
   displayHourly,
   displayWeekly,
   displayError,
   highlightBtn,
-} from './ui.js';
+} from './ui';
 
 // set up event handlers
 setupEventHandlers();
